@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>chart</title>
+    <!--Import Google Icon Font-->
+    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" href="../CSS/materialize.min.css"  media="screen,projection"/>
+    <link type="text/css" rel="stylesheet" href="../CSS/chart.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+<header>
+    <nav class="top-nav grey darken-3" style="position: fixed; z-index:1;">
+        <div class="container">
+            <div class="nav-wrapper">
+                <a href="#" class="brand-logo">CHART</a>
+                <a href="#" data-activates="nav-mobile" class="button-collapse top-nav waves-effect waves-light circle hide-on-large-only"><i class="material-icons">menu</i></a>
+            </div>
+        </div>
+    </nav>
+
+    <ul class="side-nav fixed" id="nav-mobile">
+        <li><a href="mainpage.html"><i class="material-icons">chat_bubble_outline</i>MainPage</a></li>
+        <li><a href="settings.html"><i class="material-icons">settings</i>Settings</a></li>
+        <li><a href="chart.html"><i class="material-icons">grade</i>Chart Data</a></li>
+    </ul>
+</header>
+<div style="padding-top: 56px">
+    <div id="curve_chart"></div>
+    <div>
+        <p class="today_title">Today's Leaving Time</p>
+        <p class="today">7:45(20 mins later than expected)</p>
+    </div>
+    <div>
+        <h5 class="tips_title"><i style="margin: 0 10px;" class="material-icons">announcement</i>Alert</h5>
+        <h5 id="tips" class="tips">This is the 5th time you are late this week!</h5>
+    </div>
+
+</div>
+</body>
+<script type="text/javascript" src="../JS/jquery-1.11.3.min.js"></script>
+<script type="text/javascript" src="../JS/materialize.min.js"></script>
+<script type="text/javascript" src="../JS/chart.js"></script>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">
+    google.charts.load('current', {'packages':['corechart']});
+    google.charts.setOnLoadCallback(drawChart);
+
+    function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+            ['Week', 'Actual Time', 'Setting Time'],
+            ['Mon',  7,      7],
+            ['Tue',  8,      7],
+            ['Wed',  9,      7],
+            ['Thu',  7,      7],
+            ['Fri',  6,      7],
+            ['Sat',  7,      7],
+            ['Sun',  9,      7]
+        ]);
+
+        var options = {
+            title: 'Weekly Leaving Time',
+            curveType: 'function',
+            legend: { position: 'bottom' }
+        };
+
+        var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
+
+        chart.draw(data, options);
+    }
+</script>
+</html>

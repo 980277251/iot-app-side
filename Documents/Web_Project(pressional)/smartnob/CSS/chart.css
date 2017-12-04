@@ -1,0 +1,32 @@
+/*Tips*/
+.tips_title{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: red;
+}
+.tips{
+    display: flex;
+    height: 100px;
+    padding: 0 10%;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: red;
+}
+/*Today's leaving time*/
+.today_title{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+.today{
+    display: flex;
+    height: 50px;
+    padding: 0 10%;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}

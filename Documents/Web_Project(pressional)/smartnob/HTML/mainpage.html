@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>mainpage</title>
+    <!--Import Google Icon Font-->
+    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" href="../CSS/materialize.min.css"  media="screen,projection"/>
+    <link type="text/css" rel="stylesheet" href="../CSS/mainpage.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+<header>
+    <nav class="top-nav grey darken-3" style="position: fixed; z-index:1;">
+        <div class="container">
+            <div class="nav-wrapper">
+                <a href="#" class="brand-logo">MAINPAGE</a>
+                <a href="#" data-activates="nav-mobile" class="button-collapse top-nav waves-effect waves-light circle hide-on-large-only"><i class="material-icons">menu</i></a>
+            </div>
+        </div>
+    </nav>
+
+    <ul class="side-nav fixed" id="nav-mobile">
+        <li><a href="mainpage.html"><i class="material-icons">chat_bubble_outline</i>MainPage</a></li>
+        <li><a href="settings.html"><i class="material-icons">settings</i>Settings</a></li>
+        <li><a href="chart.html"><i class="material-icons">grade</i>Chart Data</a></li>
+    </ul>
+
+</header>
+<div>
+    <!--weather-->
+    <div style="flex: 1; padding-top: 56px">
+        <div style="border: 1px solid #fff;">
+            <div id="weather-wrap" class="wea-group" style="background-color:#7b888a;border: 1px solid #fff;
+								-moz-border-radius: 10px;-webkit-border-radius: 10px;
+								">
+                <a href="#"><weather
+                        :weather-data="weatherData"
+                        :weather-icon="weatherIcon">
+                </weather></a>
+            </div>
+            <div style="display: flex;justify-content: center; ">
+                <template id="weather-container">
+                    <div class="weather-flex">
+                        <div class="weather-temperature-city-wrapper">
+                            <div class="weather-temperature">{{ weatherData.main.temp + "°"}}</div>
+                            <div class="weather-city">{{ weatherData.name }}</div>
+                            <div class="weather-city">{{ weatherData.weather[0].description }}</div>
+                        </div>
+                        <div class="weather-icon">
+
+                            <div v-if="weatherIcon.sunShower" class="icon sun-shower">
+                                <div class="cloud"></div>
+                                <div class="sun">
+                                    <div class="rays"></div>
+                                </div>
+                                <div class="rain"></div>
+                            </div>
+
+                            <div v-if="weatherIcon.thunderStorm"  class="icon thunder-storm">
+                                <div class="cloud"></div>
+                                <div class="lightning">
+                                    <div class="bolt"></div>
+                                    <div class="bolt"></div>
+                                </div>
+                            </div>
+
+                            <div v-if="weatherIcon.cloudy"  class="icon cloudy">
+                                <div class="cloud"></div>
+                                <div class="cloud"></div>
+                            </div>
+
+                            <div v-if="weatherIcon.flurries"  class="icon flurries">
+                                <div class="cloud"></div>
+                                <div class="snow">
+                                    <div class="flake"></div>
+                                    <div class="flake"></div>
+                                </div>
+                            </div>
+
+                            <div v-if="weatherIcon.sunny"  class="icon sunny">
+                                <div class="sun">
+                                    <div class="rays"></div>
+                                </div>
+                            </div>
+
+                            <div v-if="weatherIcon.rainy"  class="icon rainy">
+                                <div class="cloud"></div>
+                                <div class="rain"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="weather-flex weather-wind-humidity-wrapper" >
+                        <div class="weather-wind">{{ weatherData.clouds.all }}<small>MPH</small></div>
+                        <div class="weather-humidity">{{ weatherData.main.humidity }}<small>%</small></div>
+                    </div>
+                </template>
+            </div>
+        </div>
+    </div>
+</div>
+<div>
+    <h5 class="tips_title"><i style="margin: 0 10px;" class="material-icons">announcement</i>Tips</h5>
+    <h5 id="tips" class="tips">Remember to take an umbrella</h5>
+</div>
+</body>
+<script type="text/javascript" src="../JS/jquery-1.11.3.min.js"></script>
+<script type="text/javascript" src="../JS/materialize.min.js"></script>
+<script type="text/javascript" src="../JS/vue.js"></script>
+<script type="text/javascript">
+    //封装ajax操作
+    function AjaxHelper() {
+        this.ajax = function(url, type, dataType, data, callback, error, async) {
+            $.ajax({
+                url: url,
+                type: type,
+                dataType: dataType,
+                data: data,
+                success: callback,
+                async: async,
+                error: error
+            })
+        }
+    }
+    AjaxHelper.prototype.get = function(url, data, callback, error) {
+        this.ajax(url, 'GET', 'json', data, callback, error, false)
+    }
+    AjaxHelper.prototype.post = function(url, data, callback) {
+        this.ajax(url, 'POST', 'json', data, callback)
+    }
+
+    AjaxHelper.prototype.put = function(url, data, callback) {
+        this.ajax(url, 'PUT', 'json', data, callback)
+    }
+
+    AjaxHelper.prototype.delete = function(url, data, callback) {
+        this.ajax(url, 'DELETE', 'json', data, callback)
+    }
+
+    AjaxHelper.prototype.jsonp = function(url, data, callback) {
+        this.ajax(url, 'GET', 'jsonp', data, callback)
+    }
+
+    AjaxHelper.prototype.constructor = AjaxHelper;
+
+    var ajaxHelper = new AjaxHelper();
+
+</script>
+<script type="text/javascript" src="../JS/mainPage-weather.js"></script>
+<script type="text/javascript" src="../JS/mainpage.js"></script>
+</html>
